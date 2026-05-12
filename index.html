@@ -1,238 +1,624 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delinquente · Catálogo en construcción</title>
+  <style>
+    :root{
+      --bg:#050006;
+      --panel:#110713;
+      --panel-2:#18091d;
+      --text:#ffffff;
+      --muted:#c9b8cf;
+      --soft:#8c7892;
+      --pink:#ff2bc2;
+      --violet:#8b4dff;
+      --cyan:#38f5ff;
+      --line:rgba(255,255,255,.12);
+    }
 
-<title>DELINQUENTE</title>
+    *{box-sizing:border-box;}
 
-<style>
-body{
-background:#000;
-color:white;
-font-family:Arial,sans-serif;
-margin:0;
-text-align:center;
-}
+    html{scroll-behavior:smooth;}
 
-header{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:30px;
-}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,43,194,.20), transparent 32%),
+        radial-gradient(circle at 85% 25%, rgba(56,245,255,.14), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(139,77,255,.16), transparent 36%),
+        var(--bg);
+      color:var(--text);
+      font-family:Arial, Helvetica, sans-serif;
+      line-height:1.5;
+    }
 
-h1{
-font-size:64px;
-letter-spacing:12px;
-margin:0 0 20px 0;
-}
+    a{color:inherit;}
 
-.subtitulo{
-color:#bfbfbf;
-font-size:20px;
-max-width:700px;
-line-height:1.5;
-}
+    .wrap{
+      width:min(1120px, calc(100% - 36px));
+      margin:0 auto;
+    }
 
-.botones{
-margin-top:35px;
-display:flex;
-gap:15px;
-flex-wrap:wrap;
-justify-content:center;
-}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(14px);
+      background:rgba(5,0,6,.72);
+      border-bottom:1px solid var(--line);
+    }
 
-.boton{
-border:1px solid #ff2bc2;
-color:white;
-text-decoration:none;
-padding:14px 24px;
-border-radius:999px;
-font-weight:bold;
-}
+    .nav{
+      min-height:68px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-.boton:hover{
-background:#ff2bc2;
-}
+    .brand-small{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      font-size:14px;
+    }
 
-section{
-padding:70px 25px;
-border-top:1px solid #222;
-}
+    .brand-mark{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.2);
+      background:linear-gradient(135deg, var(--pink), var(--violet));
+      box-shadow:0 0 28px rgba(255,43,194,.35);
+    }
 
-h2{
-font-size:34px;
-letter-spacing:4px;
-margin-bottom:15px;
-}
+    .nav-links{
+      display:flex;
+      gap:18px;
+      font-size:13px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
 
-.texto{
-color:#bfbfbf;
-max-width:800px;
-margin:0 auto;
-line-height:1.6;
-font-size:18px;
-}
+    .nav-links a{
+      text-decoration:none;
+    }
 
-.grid{
-margin:40px auto 0 auto;
-max-width:1000px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
+    .nav-links a:hover{color:white;}
 
-.card{
-background:#111;
-border:1px solid #222;
-border-radius:22px;
-padding:25px;
-}
+    .hero{
+      min-height:calc(100vh - 68px);
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:48px;
+      align-items:center;
+      padding:68px 0;
+    }
 
-.card h3{
-margin-top:0;
-letter-spacing:2px;
-}
+    .eyebrow{
+      color:var(--cyan);
+      text-transform:uppercase;
+      letter-spacing:4px;
+      font-size:13px;
+      font-weight:700;
+      margin-bottom:18px;
+    }
 
-.card p{
-color:#aaa;
-}
+    h1{
+      margin:0;
+      font-size:clamp(48px, 8vw, 104px);
+      line-height:.88;
+      letter-spacing:10px;
+      text-transform:uppercase;
+      text-shadow:0 0 34px rgba(255,43,194,.25);
+    }
 
-footer{
-padding:40px 20px;
-color:#777;
-font-size:14px;
-border-top:1px solid #222;
-}
+    .hero-text{
+      margin:26px 0 0;
+      max-width:650px;
+      color:var(--muted);
+      font-size:clamp(18px, 2vw, 22px);
+    }
 
-@media(max-width:600px){
-h1{
-font-size:42px;
-letter-spacing:7px;
-}
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:34px;
+    }
 
-.subtitulo{
-font-size:17px;
-}
-}
-</style>
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:0 22px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      font-size:13px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .btn.primary{
+      background:linear-gradient(135deg, var(--pink), var(--violet));
+      border-color:transparent;
+      box-shadow:0 0 34px rgba(255,43,194,.28);
+    }
+
+    .btn:hover{transform:translateY(-1px);}
+
+    .hero-card{
+      position:relative;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius:34px;
+      padding:24px;
+      box-shadow:0 30px 90px rgba(0,0,0,.42);
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:conic-gradient(from 140deg, transparent, rgba(255,43,194,.20), transparent, rgba(56,245,255,.14), transparent);
+      animation:spin 12s linear infinite;
+      opacity:.8;
+    }
+
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    .hero-card-inner{
+      position:relative;
+      background:rgba(5,0,6,.86);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:26px;
+      padding:34px 24px;
+      min-height:420px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .placeholder-logo{
+      width:min(330px, 80%);
+      min-height:150px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:30px;
+      border:1px dashed rgba(255,255,255,.25);
+      color:var(--soft);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      padding:24px;
+    }
+
+    .note{
+      margin-top:18px;
+      color:var(--soft);
+      font-size:14px;
+    }
+
+    section{
+      padding:86px 0;
+      border-top:1px solid var(--line);
+    }
+
+    .section-head{
+      max-width:820px;
+      margin-bottom:38px;
+    }
+
+    h2{
+      margin:0 0 14px;
+      font-size:clamp(32px, 5vw, 58px);
+      line-height:1;
+      letter-spacing:4px;
+      text-transform:uppercase;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:18px;
+      margin:0;
+      max-width:780px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:26px;
+      min-height:220px;
+    }
+
+    .card .tag{
+      display:inline-block;
+      color:var(--cyan);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      margin-bottom:18px;
+    }
+
+    .card h3{
+      margin:0 0 12px;
+      font-size:24px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .card p{
+      color:var(--muted);
+      margin:0;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:42px;
+      align-items:center;
+    }
+
+    .image-frame{
+      border-radius:34px;
+      border:1px solid var(--line);
+      background:linear-gradient(135deg, rgba(255,43,194,.20), rgba(56,245,255,.10));
+      padding:18px;
+      min-height:430px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .image-frame img{
+      width:100%;
+      max-width:390px;
+      display:block;
+      border-radius:26px;
+      box-shadow:0 25px 70px rgba(0,0,0,.45);
+    }
+
+    .image-fallback{
+      border:1px dashed rgba(255,255,255,.25);
+      border-radius:26px;
+      width:100%;
+      min-height:360px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:var(--soft);
+      padding:20px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .story p{
+      color:var(--muted);
+      font-size:18px;
+      margin:0 0 18px;
+    }
+
+    .quote{
+      margin-top:26px;
+      padding:22px;
+      border-left:3px solid var(--pink);
+      background:rgba(255,255,255,.04);
+      border-radius:0 22px 22px 0;
+      color:white;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:16px;
+      counter-reset:step;
+    }
+
+    .step{
+      counter-increment:step;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      border-radius:26px;
+      padding:22px;
+      min-height:170px;
+    }
+
+    .step::before{
+      content:"0" counter(step);
+      color:var(--pink);
+      font-weight:900;
+      display:block;
+      margin-bottom:14px;
+      letter-spacing:2px;
+    }
+
+    .step h3{
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:18px;
+    }
+
+    .step p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .contact-box{
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:34px;
+      background:
+        linear-gradient(135deg, rgba(255,43,194,.14), rgba(139,77,255,.08)),
+        rgba(255,255,255,.04);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+
+    .contact-box p{
+      margin:0;
+      color:var(--muted);
+      max-width:650px;
+      font-size:18px;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:34px 0;
+      color:var(--soft);
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    @media(max-width:860px){
+      .hero,
+      .split{
+        grid-template-columns:1fr;
+      }
+
+      .hero{
+        padding-top:48px;
+      }
+
+      .grid,
+      .steps{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      h1{
+        letter-spacing:6px;
+      }
+
+      .hero-card-inner{
+        min-height:310px;
+      }
+
+      section{
+        padding:64px 0;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<h1>DELINQUENTE</h1>
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="brand-small">
+        <div class="brand-mark"></div>
+        <span>Delinquente</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#tina">Tina</a>
+        <a href="#comprar">Cómo comprar</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </div>
 
-<p class="subtitulo">
-Objetos, accesorios y piezas seleccionadas con estética propia.
-Un escaparate en construcción para cosas bonitas, raras y con carácter.
-</p>
+  <main>
+    <header class="wrap hero">
+      <div>
+        <div class="eyebrow">Catálogo en construcción</div>
+        <h1>Delinquente</h1>
+        <p class="hero-text">
+          Objetos, accesorios y piezas seleccionadas con estética propia. Un escaparate oscuro, brillante y un poco descarado para cosas bonitas que no han pedido permiso para existir.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#catalogo">Ver catálogo</a>
+          <a class="btn" href="#tina">Conocer a Tina</a>
+          <a class="btn" href="#contacto">Contacto</a>
+        </div>
+      </div>
 
-<div class="botones">
-<a class="boton" href="#catalogo">Ver catálogo</a>
-<a class="boton" href="#contacto">Contacto</a>
-<a class="boton" href="https://www.instagram.com/" target="_blank">Instagram</a>
-</div>
-</header>
+      <aside class="hero-card" aria-label="Logo Delinquente">
+        <div class="hero-card-inner">
+          <div class="placeholder-logo">
+            aquí irá el logo neon<br />logo-neon.png
+          </div>
+          <div class="note">Subiremos el logo real cuando dejemos cerrada la maqueta.</div>
+        </div>
+      </aside>
+    </header>
 
-<section id="catalogo">
-<h2>CATÁLOGO</h2>
+    <section id="catalogo">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Catálogo</h2>
+          <p class="lead">
+            La primera selección está en preparación. De momento, estas son las familias principales del universo Delinquente.
+          </p>
+        </div>
 
-<p class="texto">
-Estamos preparando la primera selección de artículos. De momento, esta web funciona como escaparate inicial de Delinquente.
-</p>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">PEND · 0001</span>
+            <h3>Pendientes</h3>
+            <p>Piezas llamativas, brillantes, oscuras o directamente excesivas. Porque la discreción ya tiene demasiados representantes.</p>
+          </article>
 
-<div class="grid">
+          <article class="card">
+            <span class="tag">COLL · 0001</span>
+            <h3>Collares</h3>
+            <p>Accesorios con presencia visual, pensados para completar looks con intención y un punto de drama bien administrado.</p>
+          </article>
 
-<div class="card">
-<h3>PENDIENTES</h3>
-<p>Piezas seleccionadas, brillantes, oscuras o descaradas según el día y el nivel de drama disponible.</p>
-</div>
+          <article class="card">
+            <span class="tag">OBJ · 0001</span>
+            <h3>Objetos</h3>
+            <p>Decoración, piezas handmade y pequeños hallazgos transformados con estética Delinquente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<h3>COLLARES</h3>
-<p>Accesorios con presencia visual, pensados para completar looks con personalidad.</p>
-</div>
+    <section id="tina">
+      <div class="wrap split">
+        <div class="image-frame">
+          <div class="image-fallback">
+            aquí irá Tina Delinquente<br />tina-delinq-roja.png
+          </div>
+        </div>
 
-<div class="card">
-<h3>OBJETOS</h3>
-<p>Decoración, piezas handmade y pequeños hallazgos transformados con estética Delinquente.</p>
-</div>
+        <div class="story">
+          <div class="eyebrow">Mascota oficial</div>
+          <h2>Tina Delinquente</h2>
+          <p>
+            Tina Delinquente no nació para comportarse bien. Apareció entre glitter, neón y objetos rescatados, como si alguien hubiera mezclado una diva, una alarma de discoteca y una mala decisión decorativa.
+          </p>
+          <p>
+            A veces es mascota. A veces es alter ego. A veces solo mira desde el fondo, con gafas grandes y actitud de saber exactamente qué está pasando aunque nadie se lo haya explicado.
+          </p>
+          <p>
+            Su misión no es vender por vender. Su misión es convertir el caos en colección y recordar que una pieza pequeña también puede tener carácter.
+          </p>
+          <div class="quote">Hecha de glitter, gasolina y mala reputación.</div>
+        </div>
+      </div>
+    </section>
 
-</div>
-</section>
+    <section id="marca">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>La marca</h2>
+          <p class="lead">
+            Delinquente mezcla objeto, actitud y puesta en escena. No es una tienda fría ni un catálogo sin alma: es una selección visual con humor ácido, brillo, sombra y mucha personalidad.
+          </p>
+        </div>
 
-<section>
-<h2>LA MARCA</h2>
-<section id="tina">
+        <div class="grid">
+          <article class="card">
+            <span class="tag">01</span>
+            <h3>Selección</h3>
+            <p>No todo entra. Cada pieza debe tener presencia, utilidad o ese punto absurdo que la vuelve irresistible.</p>
+          </article>
 
-<div class="tina-box">
+          <article class="card">
+            <span class="tag">02</span>
+            <h3>Estética</h3>
+            <p>Oscuro, neón, cyberpop, glam y un poco de mala reputación bien peinada. Nada de escaparate genérico de domingo triste.</p>
+          </article>
 
-<div class="tina-imagen">
-<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop" alt="Tina Delinquente">
-</div>
+          <article class="card">
+            <span class="tag">03</span>
+            <h3>Historia</h3>
+            <p>Los objetos no aparecen solos. Forman parte de un pequeño universo visual donde Tina observa, juzga y de vez en cuando aprueba.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<div class="tina-texto">
+    <section id="comprar">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Cómo comprar</h2>
+          <p class="lead">
+            De momento, el catálogo funciona por reserva y mensaje directo. Más adelante la web podrá crecer, pero ahora lo importante es mantener el control del stock y no montar una nave espacial para vender pendientes, que bastante tenemos.
+          </p>
+        </div>
 
-<h2>TINA DELINQUENTE</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>Mira</h3>
+            <p>Consulta las piezas disponibles cuando el catálogo empiece a publicarse.</p>
+          </div>
+          <div class="step">
+            <h3>Pregunta</h3>
+            <p>Escribe por mensaje directo para confirmar disponibilidad.</p>
+          </div>
+          <div class="step">
+            <h3>Reserva</h3>
+            <p>Si la pieza está disponible, se aparta y se concreta entrega o envío.</p>
+          </div>
+          <div class="step">
+            <h3>Disfruta</h3>
+            <p>Recibes algo con más personalidad que la media del comercio humano.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-Tina Delinquente no nació para comportarse bien.
-Entre glitter, neón y objetos rescatados, convirtió el exceso en estética y el caos en colección.
-</p>
+    <section id="contacto">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <h2>Contacto</h2>
+            <p>
+              Para reservas, dudas o catálogo completo, escribe por mensaje directo. Los enlaces definitivos de Instagram, WhatsApp o correo se añadirán cuando quieras cerrarlos.
+            </p>
+          </div>
+          <a class="btn primary" href="#">Próximamente</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<p>
-A veces aparece como mascota.
-A veces como alter ego.
-Y otras simplemente observa desde el fondo mientras alguien toma malas decisiones decorativas.
-</p>
-
-<p>
-La verdad es que nadie sabe exactamente quién manda aquí.
-</p>
-
-</div>
-
-</div>
-
-</section>
-<p class="texto">
-Delinquente nace como una mezcla de objeto, actitud y puesta en escena. No es solo vender cosas: es construir un pequeño universo visual donde cada pieza tenga intención.
-</p>
-</section>
-<section id="tina">
-
-<h2>TINA DELINQUENTE</h2>
-
-<p class="texto">
-Tina Delinquente no nació para comportarse bien.
-Entre glitter, neón y objetos rescatados, convirtió el exceso en estética y el caos en colección.
-</p>
-
-<p class="texto">
-A veces aparece como mascota.
-A veces como alter ego.
-Y otras simplemente observa desde el fondo mientras alguien toma malas decisiones decorativas.
-</p>
-
-<img src="https://picsum.photos/500/500"
-style="width:300px;border-radius:30px;margin-top:30px;">
-
-</section>
-<section id="contacto">
-<h2>CONTACTO</h2>
-
-<p class="texto">
-Para consultar disponibilidad, reservar piezas o pedir información, escribe por mensaje directo.
-</p>
-</section>
-
-<footer>
-DELINQUENTE · catálogo en construcción
-</footer>
+  <footer>
+    <div class="wrap footer-inner">
+      <span>Delinquente · catálogo en construcción</span>
+      <span>Tina vigila desde el fondo</span>
+    </div>
+  </footer>
 
 </body>
 </html>
+
