@@ -7,36 +7,183 @@
 <title>DELINQUENTE</title>
 
 <style>
-
 body{
 background:#000;
 color:white;
 font-family:Arial,sans-serif;
+margin:0;
 text-align:center;
-padding-top:120px;
+}
+
+header{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:30px;
 }
 
 h1{
-font-size:70px;
+font-size:64px;
 letter-spacing:12px;
-margin-bottom:20px;
+margin:0 0 20px 0;
 }
 
-p{
-color:#999;
-font-size:22px;
+.subtitulo{
+color:#bfbfbf;
+font-size:20px;
+max-width:700px;
+line-height:1.5;
 }
 
+.botones{
+margin-top:35px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.boton{
+border:1px solid #ff2bc2;
+color:white;
+text-decoration:none;
+padding:14px 24px;
+border-radius:999px;
+font-weight:bold;
+}
+
+.boton:hover{
+background:#ff2bc2;
+}
+
+section{
+padding:70px 25px;
+border-top:1px solid #222;
+}
+
+h2{
+font-size:34px;
+letter-spacing:4px;
+margin-bottom:15px;
+}
+
+.texto{
+color:#bfbfbf;
+max-width:800px;
+margin:0 auto;
+line-height:1.6;
+font-size:18px;
+}
+
+.grid{
+margin:40px auto 0 auto;
+max-width:1000px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.card{
+background:#111;
+border:1px solid #222;
+border-radius:22px;
+padding:25px;
+}
+
+.card h3{
+margin-top:0;
+letter-spacing:2px;
+}
+
+.card p{
+color:#aaa;
+}
+
+footer{
+padding:40px 20px;
+color:#777;
+font-size:14px;
+border-top:1px solid #222;
+}
+
+@media(max-width:600px){
+h1{
+font-size:42px;
+letter-spacing:7px;
+}
+
+.subtitulo{
+font-size:17px;
+}
+}
 </style>
 </head>
 
 <body>
 
+<header>
 <h1>DELINQUENTE</h1>
 
-<p>
-La web ya está viva.
+<p class="subtitulo">
+Objetos, accesorios y piezas seleccionadas con estética propia.
+Un escaparate en construcción para cosas bonitas, raras y con carácter.
 </p>
+
+<div class="botones">
+<a class="boton" href="#catalogo">Ver catálogo</a>
+<a class="boton" href="#contacto">Contacto</a>
+<a class="boton" href="https://www.instagram.com/" target="_blank">Instagram</a>
+</div>
+</header>
+
+<section id="catalogo">
+<h2>CATÁLOGO</h2>
+
+<p class="texto">
+Estamos preparando la primera selección de artículos. De momento, esta web funciona como escaparate inicial de Delinquente.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>PENDIENTES</h3>
+<p>Piezas seleccionadas, brillantes, oscuras o descaradas según el día y el nivel de drama disponible.</p>
+</div>
+
+<div class="card">
+<h3>COLLARES</h3>
+<p>Accesorios con presencia visual, pensados para completar looks con personalidad.</p>
+</div>
+
+<div class="card">
+<h3>OBJETOS</h3>
+<p>Decoración, piezas handmade y pequeños hallazgos transformados con estética Delinquente.</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>LA MARCA</h2>
+
+<p class="texto">
+Delinquente nace como una mezcla de objeto, actitud y puesta en escena. No es solo vender cosas: es construir un pequeño universo visual donde cada pieza tenga intención.
+</p>
+</section>
+
+<section id="contacto">
+<h2>CONTACTO</h2>
+
+<p class="texto">
+Para consultar disponibilidad, reservar piezas o pedir información, escribe por mensaje directo.
+</p>
+</section>
+
+<footer>
+DELINQUENTE · catálogo en construcción
+</footer>
 
 </body>
 </html>
